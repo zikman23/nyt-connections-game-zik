@@ -84,7 +84,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center w-1/3 mx-auto mt-8">
+      <div className="flex flex-col items-center max-w-[624px] w-11/12 md:w-3/4 lg:w-7/12 mx-auto mt-8">
         <h1 className="text-black text-4xl font-semibold my-4 ml-4">Connections</h1>
         <hr className="mb-4 md:mb-4 w-full"></hr>
         <h1 className="text-black mb-4">Create four groups of four!</h1>

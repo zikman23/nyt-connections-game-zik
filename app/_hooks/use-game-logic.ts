@@ -4,18 +4,42 @@ import { Category, SubmitResult, Word } from '../_types';
 import { delay, shuffleArray } from '../_utils';
 
 export default function useGameLogic() {
-  const [gameWords, setGameWords] = useState<Word[]>([]);
+  // Initial state for gameWords is set from localStorage or by shuffling
+  const [gameWords, setGameWords] = useState<Word[]>(() => {
+    const savedWords = localStorage.getItem('gameWords');
+    return savedWords
+      ? JSON.parse(savedWords)
+      : shuffleArray(categories.flatMap((category) => category.items.map((word) => ({ word: word, level: category.level }))));
+  });
+
   const selectedWords = useMemo(() => gameWords.filter((item) => item.selected), [gameWords]);
-  const [clearedCategories, setClearedCategories] = useState<Category[]>([]);
+
+  // Initial state for clearedCategories is set from localStorage or as an empty array
+  const [clearedCategories, setClearedCategories] = useState<Category[]>(() => {
+    const savedCategories = localStorage.getItem('clearedCategories');
+    return savedCategories ? JSON.parse(savedCategories) : [];
+  });
+
+  // Initial state for mistakesRemaining is set from localStorage or as the default value
+  const [mistakesRemaining, setMistakesRemaning] = useState(() => {
+    const savedMistakes = localStorage.getItem('mistakesRemaining');
+    return savedMistakes ? parseInt(savedMistakes, 10) : 4;
+  });
+
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
-  const [mistakesRemaining, setMistakesRemaning] = useState(4);
+
   const guessHistoryRef = useRef<Word[][]>([]);
 
   useEffect(() => {
-    const words: Word[] = categories.map((category) => category.items.map((word) => ({ word: word, level: category.level }))).flat();
-    setGameWords(shuffleArray(words));
-  }, []);
+    // Update localStorage when game state changes
+    localStorage.setItem('gameWords', JSON.stringify(gameWords));
+    console.log('Saved gameWords to localStorage:', gameWords);
+    localStorage.setItem('clearedCategories', JSON.stringify(clearedCategories));
+    console.log('Saved clearedCategories to localStorage:', clearedCategories);
+    localStorage.setItem('mistakesRemaining', mistakesRemaining.toString());
+    console.log('Saved mistakesRemaining to localStorage:', mistakesRemaining);
+  }, [gameWords, clearedCategories, mistakesRemaining]); // Depend on game state variables
 
   const selectWord = (word: Word): void => {
     const newGameWords = gameWords.map((item) => {
@@ -96,11 +120,13 @@ export default function useGameLogic() {
 
     await delay(1000);
     setIsLost(true);
+    localStorage.clear();
   };
 
   const handleWin = async () => {
     await delay(1000);
     setIsWon(true);
+    localStorage.clear();
   };
 
   return {
