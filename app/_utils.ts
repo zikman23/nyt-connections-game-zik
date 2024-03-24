@@ -13,19 +13,17 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 export const getWordColor = (category: 1 | 2 | 3 | 4): string => {
   switch (category) {
     case 1:
-      return "bg-yellow";
+      return 'bg-yellow';
     case 2:
-      return "bg-green";
+      return 'bg-green';
     case 3:
-      return "bg-blue";
+      return 'bg-blue';
     case 4:
-      return "bg-purple";
+      return 'bg-purple';
     default:
-      return "bg-black";
+      return 'bg-black';
   }
 };
-
-
 
 export const delay = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));

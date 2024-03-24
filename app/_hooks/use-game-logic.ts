@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { categories } from '../_examples';
+import { categories } from '../word-set';
 import { Category, SubmitResult, Word } from '../_types';
 import { delay, shuffleArray } from '../_utils';
 
@@ -46,10 +46,6 @@ export default function useGameLogic() {
   };
 
   const getSubmitResult = (): SubmitResult => {
-   
-
-    
-
     guessHistoryRef.current.push(selectedWords);
 
     const likenessCounts = categories.map((category) => {

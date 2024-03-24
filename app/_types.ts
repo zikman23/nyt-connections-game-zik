@@ -10,17 +10,8 @@ export type Word = {
   selected?: boolean;
 };
 
-export type SubmitResultType =
-  | "correct"
-  | "incorrect"
-  | "loss"
-  | "win";
+export type SubmitResultType = 'correct' | 'incorrect' | 'loss' | 'win';
 
 export type SubmitResult = {
   result: SubmitResultType;
 };
-
-/* export type CellAnimationState = {
-  show: boolean;
-  index: number;
-}; */

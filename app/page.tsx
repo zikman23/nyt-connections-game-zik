@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import ControlButton from './_components/control-button';
+import ControlButton from './_components/buttons';
 import Grid from './_components/game/grid';
 
 import Popup from './_components/popup';
