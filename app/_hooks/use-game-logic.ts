@@ -58,7 +58,7 @@ export default function useGameLogic() {
     if (maxLikeness === 4) {
       return getCorrectResult(categories[maxIndex]);
     } else {
-      return getIncorrectResult(maxLikeness);
+      return getIncorrectResult();
     }
   };
 
@@ -73,7 +73,7 @@ export default function useGameLogic() {
     }
   };
 
-  const getIncorrectResult = (maxLikeness: number): SubmitResult => {
+  const getIncorrectResult = (): SubmitResult => {
     setMistakesRemaning(mistakesRemaining - 1);
 
     if (mistakesRemaining === 1) {

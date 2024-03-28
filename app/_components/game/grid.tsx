@@ -1,4 +1,4 @@
-import { /* CellAnimationState, */ Category, Word } from '@/app/_types';
+import { Category, Word } from '@/app/_types';
 import Cell from './tile';
 import ClearedCategory from './cleared-category';
 
